@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS customer (
 CREATE TABLE IF NOT EXISTS transactions (
     customer_ID INT NOT NULL,                       -- Customer ID
     order_ID INT NOT NULL,                          -- Order ID
-    trans_type VARCHAR (100) NOT NULL,              -- Transactions Type (paymnet made, billng for services)
+    trans_type VARCHAR (100) NOT NULL,              -- Transactions Type (payment made, billng for services)
     amt_due INT NOT NULL                            -- Amount Due
 )
 
