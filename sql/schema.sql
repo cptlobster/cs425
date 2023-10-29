@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS fleet (
     rng INT NOT NULL,                               -- Range
     capacity INT NOT NULL,                          -- Capacity
     sta VARCHAR (10) NOT NULL,                      -- Status (stored, traveling, loading, missing, stopped)
-    dest_depot VARCHAR (100) NOT NULL               -- Destinatino depot
+    dest_depot VARCHAR (100) NOT NULL               -- Destination depot
 )
 
 CREATE TABLE IF NOT EXISTS depots(
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS customer (
 CREATE TABLE IF NOT EXISTS transactions (
     customer_ID INT NOT NULL,                       -- Customer ID
     order_ID INT NOT NULL,                          -- Order ID
-    trans_type VARCHAR (100) NOT NULL,              -- Transactions Type (paymnet made, billng for services)
+    trans_type VARCHAR (100) NOT NULL,              -- Transactions Type (payment made, billng for services)
     amt_due INT NOT NULL                            -- Amount Due
 )
 
