@@ -9,17 +9,21 @@ CREATE TABLE IF NOT EXISTS packages (
 )
 
 CREATE TABLE IF NOT EXISTS fleet (
-    vehicle_type VARCHAR (100) NOT NULL,            -- Vehical type (semi truck, tandem semi truck, airplane, train)
+    id INT PRIMARY KEY NOT NULL                     -- ID
+    vehicle_type VARCHAR (10) NOT NULL,             -- Vehical type (semi truck, tandem semi truck, airplane, train)
     rng INT NOT NULL,                               -- Range
     capacity INT NOT NULL,                          -- Capacity
     sta VARCHAR (10) NOT NULL,                      -- Status (stored, traveling, loading, missing, stopped)
-    dest_depot VARCHAR (100) NOT NULL               -- Destinatino depot
+    dest_depot INT NOT NULL                         -- Destinatino depot
 )
 
 CREATE TABLE IF NOT EXISTS depots(
-    loc VARCHAR (200) NOT NULL,                     -- Location
-    vehical_sup INT (100) NOT NULL,                 -- Vehical Support (truck, train, airplane)
-    capacity_str INT NOT NULL                       -- Capacity storage
+    id INT PRIMARY KEY NOT NULL                     -- ID
+    city VARCHAR (30) NOT NULL,                     -- Location
+    capacity INT NOT NULL                           -- Capacity
+    truck_spaces INT,                               -- Vehical Support 
+    plane_spaces INT,                               -- Vehical Support
+    boat_splaces INT                                -- Vehical Support
 )
 
 CREATE TABLE IF NOT EXISTS orders(
@@ -28,7 +32,7 @@ CREATE TABLE IF NOT EXISTS orders(
 )
 
 CREATE TABLE IF NOT EXISTS customer (
-    nme VARCHAR (100) NOT NULL,                     -- Name
+    nme VARCHAR (100) NOT NULL,                     -- Customer Name
     bill_address VARCHAR (200) NOT NULL,            -- Billing Address
     amt_due INT NOT NULL                            -- Amount Due
 )
