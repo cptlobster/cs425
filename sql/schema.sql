@@ -1,3 +1,6 @@
+-- Create all tables necessary for operation
+-- For more information, check the ER Diagram in /drawio/entityrelation.drawio
+
 CREATE TABLE IF NOT EXISTS packages (
     id INT PRIMARY KEY NOT NULL,                      -- ID
     dest INT NOT NULL REFERENCES depots(id),          -- Destination depot
