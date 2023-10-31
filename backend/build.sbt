@@ -8,6 +8,8 @@ lazy val root = (project in file("."))
     name := """backend""",
     libraryDependencies ++= Seq(
       guice,
+      jdbc,
+      "org.postgresql" % "postgresql" % "42.5.4",
       "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test
     )
   )
