@@ -3,5 +3,38 @@
 # https://www.playframework.com/documentation/latest/ScalaRouting
 # ~~~~
 
-# API controller
+### gets ###
 GET     /                           controllers.APIController.test()
+# get depot info
+GET     /depots                     controllers.DepotController.get_all()
+GET     /depots/:id                 controllers.DepotController.get(id: Long)
+GET     /depots/:id/nearby          controllers.DepotController.get_nearest_depots(id: Long)
+# get package info
+GET     /packages                   controllers.PackageController.get_all()
+GET     /packages/:id               controllers.PackageController.get(id: Long)
+# get fleet info
+GET     /fleet                      controllers.FleetController.get_all()
+GET     /fleet/:id                  controllers.FleetController.get(id: Long)
+GET     /fleet/:id/nearby           controllers.FleetController.get_nearest_depots(id: Long)
+# get timetable info
+GET     /tt                         controllers.TimetableController.get_all(1)
+GET     /tt/:id                     controllers.TimetableController.get(id: Long)
+GET     /tt/date/:date              controllers.TimetableController.get_date(date: Long)
+GET     /tt/depot/:depot            controllers.TimetableController.get_depot(depot: Long)
+GET     /tt/fleet/:vehicle          controllers.TimetableController.get_fleet(vehicle: Long)
+
+# create new items
+POST    /depot/new                  controllers.DepotController.create()
+POST    /packages/new               controllers.PackageController.create()
+POST    /fleet/new                  controllers.FleetController.create()
+POST    /tt/new                     controllers.TimetableController.create()
+
+# package state changes
+POST    /packages/:id/fleet/:fid    controllers.PackageController.move_to_fleet(id: Long, fid: Long)
+POST    /packages/:id/depot/:did    controllers.PackageController.move_to_depot(id: Long, did: Long)
+POST    /packages/:id/deliver       controllers.PackageController.mark_delivered(id: Long)
+
+# timetable state changes
+POST    /tt/:id/delay               controllers.TimetableController.delay(id: Long)
+POST    /tt/:id/redirect/:depot     controllers.TimetableController.redirect(id: Long, depot: Long)
+POST    /tt/:id/transfer/:vehicle   controllers.TimetableController.transfer(id: Long, vehicle: Long)
