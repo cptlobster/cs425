@@ -44,3 +44,44 @@ flowchart LR
         DEPOT --> DPTID["/depots/:id"] & DPTADD(["/depots/new"])
     end
 ```
+
+## Common Functionality
+Base level `GET` requests (i.e. `/packages`, `/fleet`) will provide a list of entries in their proper JSON structure. <br />
+Adding an ID number after the base request (i.e. `/packages/420`) will give you a single item.
+
+`POST` requests require JSON in the request body, formatted as specified in the data structure.
+
+## Responses
+Successful queries will respond with OK (200) and the data requested.<br />
+Depending on what went wrong during a query, a specific error code will throw:
+- If an item is not found during a `GET` request, the server will respond with Not Found (404).
+- If JSON syntax is malformed during a `POST` request, the server will respond with Bad Request (400).
+- If a user is not properly authenticated, the server will respond with Unauthorized (401)
+- If there is any other error, the server will respond with an Internal Server Error (500) whose content is the error
+  message and stacktrace, if applicable.
+
+## Data Structure
+
+### Depots
+The JSON structure of depots is as follows:
+```json 
+{}
+```
+
+### Fleet
+The JSON structure of vehicles is as follows:
+```json 
+{}
+```
+
+### Packages
+The JSON structure of packages is as follows:
+```json 
+{}
+```
+
+### Timetable
+The JSON structure of timetable entries is as follows:
+```json 
+{}
+```
