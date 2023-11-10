@@ -14,5 +14,17 @@ class PackageController @Inject()(val controllerComponents: ControllerComponents
   implicit val pkgStatFormat: OFormat[PkgStat] = Json.format[PkgStat]
   implicit val packageFormat: OFormat[Package] = Json.format[Package]
 
-}
+  def get_all(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    val return_val: JsValue = Json.obj(
+      "sql" -> "SELECT * FROM packages"
+    )
+    Ok(return_val)
+  }
+
+  def get(id: Long): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    val return_val: JsValue = Json.obj(
+      "sql" -> s"SELECT * FROM packages WHERE id = ${id}"
+    )
+    Ok(return_val)
+  }}
 
