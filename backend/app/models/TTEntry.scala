@@ -1,4 +1,4 @@
-package datatypes
+package models
 
 case class TTEntry() {
 

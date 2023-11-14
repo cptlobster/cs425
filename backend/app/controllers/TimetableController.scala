@@ -4,7 +4,7 @@ import javax.inject._
 import play.api._
 import play.api.libs.json._
 import play.api.mvc._
-import datatypes.{Timetable, TTEntry}
+import models.{Timetable, TTEntry}
 
 /**
  * This controller creates `Actions` to interact with the Timetable.

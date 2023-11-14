@@ -21,7 +21,11 @@ class APIController @Inject()(val controllerComponents: ControllerComponents) ex
    */
   def test(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     val return_val: JsValue = Json.obj(
-      "response" -> "ok"
+      "response" -> "ok",
+      "version" -> Json.obj(
+       "jvm" -> System.getProperty("java.version"),
+        "scala" -> scala.util.Properties.versionString
+      )
     )
     Ok(return_val)
   }

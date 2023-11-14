@@ -1,4 +1,4 @@
-package datatypes
+package models
 
 class Depot(id: Long,
             city: String,
