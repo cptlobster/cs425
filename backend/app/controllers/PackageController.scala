@@ -11,7 +11,7 @@ import models.Package
  */
 @Singleton
 class PackageController @Inject()(val controllerComponents: ControllerComponents) extends BaseController {
-  implicit val packageFormat: OFormat[Package] = Json.format[Package]
+  // implicit val packageFormat: OFormat[Package] = Json.format[Package]
 
   def get_all(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     val return_val: JsValue = Json.obj(
@@ -22,8 +22,16 @@ class PackageController @Inject()(val controllerComponents: ControllerComponents
 
   def get(id: Long): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     val return_val: JsValue = Json.obj(
-      "sql" -> s"SELECT * FROM packages WHERE id = ${id}"
+      "sql" -> s"SELECT * FROM packages WHERE id = $id"
     )
     Ok(return_val)
-  }}
+  }
+
+  def get_all_in_vehicle(vehicle: Long): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    val return_val: JsValue = Json.obj(
+      "sql" -> s"SELECT * FROM packages WHERE vehicle = $vehicle"
+    )
+    Ok(return_val)
+  }
+}
 

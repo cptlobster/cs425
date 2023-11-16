@@ -11,8 +11,8 @@ import models.{Timetable, TTEntry}
  */
 @Singleton
 class TimetableController @Inject()(val controllerComponents: ControllerComponents) extends BaseController {
-  implicit val ttEntryFormat: OFormat[TTEntry] = Json.format[TTEntry]
-  implicit val timetableFormat: OFormat[Timetable] = Json.format[Timetable]
+  // implicit val ttEntryFormat: OFormat[TTEntry] = Json.format[TTEntry]
+  // implicit val timetableFormat: OFormat[Timetable] = Json.format[Timetable]
 
   def get_all(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     val return_val: JsValue = Json.obj(
@@ -23,7 +23,7 @@ class TimetableController @Inject()(val controllerComponents: ControllerComponen
 
   def get(id: Long): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     val return_val: JsValue = Json.obj(
-      "sql" -> s"SELECT * FROM timetable WHERE id = ${id}"
+      "sql" -> s"SELECT * FROM timetable WHERE id = $id"
     )
     Ok(return_val)
   }

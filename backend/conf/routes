@@ -19,7 +19,7 @@ GET     /packages/:id               controllers.PackageController.get(id: Long)
 GET     /fleet                      controllers.FleetController.get_all()
 GET     /fleet/:id                  controllers.FleetController.get(id: Long)
 #GET     /fleet/:id/nearby           controllers.FleetController.get_nearest_depots(id: Long)
-#GET     /fleet/:id/packages         controllers.PackageController.get_all_in_vehicle(id: Long)
+GET     /fleet/:id/packages         controllers.PackageController.get_all_in_vehicle(id: Long)
 # get timetable info
 GET     /tt                         controllers.TimetableController.get_all()
 GET     /tt/:id                     controllers.TimetableController.get(id: Long)

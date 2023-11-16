@@ -11,7 +11,7 @@ import models.Vehicle
  */
 @Singleton
 class FleetController @Inject()(val controllerComponents: ControllerComponents) extends BaseController {
-  implicit val vehicleFormat: OFormat[Vehicle] = Json.format[Vehicle]
+  // implicit val vehicleFormat: OFormat[Vehicle] = Json.format[Vehicle]
 
   def get_all(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     val return_val: JsValue = Json.obj(
@@ -22,7 +22,7 @@ class FleetController @Inject()(val controllerComponents: ControllerComponents) 
 
   def get(id: Long): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     val return_val: JsValue = Json.obj(
-      "sql" -> s"SELECT * FROM fleet WHERE id = ${id}"
+      "sql" -> s"SELECT * FROM fleet WHERE id = $id"
     )
     Ok(return_val)
   }

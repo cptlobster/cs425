@@ -22,7 +22,7 @@ class DBController @Inject()(val controllerComponents: ControllerComponents) ext
    */
   def select(table: String): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     val return_val: JsValue = Json.obj(
-      "query" -> s"SELECT * FROM ${table}"
+      "query" -> s"SELECT * FROM $table"
     )
     Ok(return_val)
   }
