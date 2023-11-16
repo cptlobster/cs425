@@ -2,7 +2,7 @@
 This documentation explains how to utilize the REST API for the backend.
 
 # Launching
-To run locally, install some flavor of Java 11, as well as SBT. You can launch the API using:
+To run locally, install some flavor of OpenJDK 21, as well as SBT. You can launch the API using:
 ```shell
 sbt run
 ```
@@ -61,27 +61,54 @@ Depending on what went wrong during a query, a specific error code will throw:
   message and stacktrace, if applicable.
 
 ## Data Structure
+Each object structure is based on the case classes defined under `app/models`. In a case where multiple items are
+requested, they will be returned as a list of JSON objects.
 
 ### Depots
 The JSON structure of depots is as follows:
 ```json 
-{}
+{
+  "id": 0,
+  "city": "Lynchburg, VA",
+  "capacity": 2300.0,
+  "truck_spaces": 4,
+  "plane_spaces": 0,
+  "train_spaces": 2
+}
 ```
 
 ### Fleet
 The JSON structure of vehicles is as follows:
 ```json 
-{}
+{
+  "id": 0,
+  "vehicle_type": "Truck",
+  "range": 300,
+  "capacity": 200,
+  "status": "In Transit"
+}
 ```
 
 ### Packages
 The JSON structure of packages is as follows:
 ```json 
-{}
+{
+  "id": 0,
+  "dest": "Chicago, IL",
+  "status": "In Transit",
+  "category": "Electronics",
+  "weight": 2.4,
+  "value": 599.99,
+  "vehicle": 0
+}
 ```
+`vehicle` is the ID number of the vehicle that the package is on. The key `depot` is used instead if the package is
+stored in a depot.
 
 ### Timetable
 The JSON structure of timetable entries is as follows:
 ```json 
-{}
+{
+  
+}
 ```
