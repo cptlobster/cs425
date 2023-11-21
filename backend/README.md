@@ -18,6 +18,11 @@ docker run -d -p "9000:9000" backend
 Using Docker-Compose is preferable because it handles ports automatically and will network the backend container with
 the Postgres database.
 
+```shell
+# from base directory
+docker compose up
+```
+
 # Request types
 For any request to read resources, you use `GET` requests. For anything where you add or modify resources, use `POST`
 requests, where the body contains the content as a JSON object.
@@ -28,7 +33,7 @@ Any item that begins with `:` is a variable. For example, `:id` is the variable 
 documented below.
 ```mermaid
 flowchart LR
-    ROOT["/"] --> PKGS["/packages"] & FLEET["/fleet"] & DEPOT["/depots"] & TT["/tt"]
+    ROOT["/"] --> SQL["/sql"] & PKGS["/packages"] & FLEET["/fleet"] & DEPOT["/depots"] & TT["/tt"]
     subgraph TTG[Timetable]
         TT --> TTID["/tt/:id"] & TTDATE["/tt/date/:date"] & TTFLT["/tt/fleet/:vehicle"] & TTDPT["/tt/depot/:depot"]  & TTADD(["/tt/new"])
         TTID --> TTDEL(["/tt/:id/delay"]) & TTRDR(["/tt/:id/redirect/:depot"]) & TTCHF(["/tt/:id/transfer/:vehicle"])
@@ -55,6 +60,7 @@ Adding an ID number after the base request (i.e. `/packages/420`) will give you 
 Successful queries will respond with OK (200) and the data requested.<br />
 Depending on what went wrong during a query, a specific error code will throw:
 - If an item is not found during a `GET` request, the server will respond with Not Found (404).
+- If a list is empty during a `GET` request (i.e. a filter returns no results), the server will respond with No Content (301).
 - If JSON syntax is malformed during a `POST` request, the server will respond with Bad Request (400).
 - If a user is not properly authenticated, the server will respond with Unauthorized (401)
 - If there is any other error, the server will respond with an Internal Server Error (500) whose content is the error
@@ -63,6 +69,26 @@ Depending on what went wrong during a query, a specific error code will throw:
 ## Data Structure
 Each object structure is based on the case classes defined under `app/models`. In a case where multiple items are
 requested, they will be returned as a list of JSON objects.
+
+### Low-Level SQL API
+You can use POST requests to `/sql` with the SQL query in the body to execute SQL queries directly. This is solely as a
+fallback in case other functionality is not fully working.
+
+Results are returned as a list of JSON objects, with the row names as keys. For example, the table:
+
+| a | b | c |
+|---|---|---|
+| 0 | 1 | 2 |
+| 2 | 6 | 9 |
+
+would result in the following JSON:
+
+```json
+[
+  {"a": 0, "b": 1, "c": 2},
+  {"a": 2, "b": 6, "c": 9}
+]
+```
 
 ### Depots
 The JSON structure of depots is as follows:
