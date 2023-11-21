@@ -9,6 +9,7 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Seq(
       guice,
       jdbc,
-      "org.postgresql" % "postgresql" % "42.5.4"
+      "org.postgresql" % "postgresql" % "42.5.4",
+      "org.playframework.anorm" %% "anorm" % "2.7.0"
     )
   )

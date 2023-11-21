@@ -5,4 +5,4 @@ FROM postgres
 # this will execute the first time the container runs.
 # If it fails, just nuke the container and start over
 COPY schema.sql /docker-entrypoint-initdb.d
-COPY permissions.sql /docker-entrypoint-initdb.d
+#COPY permissions.sql /docker-entrypoint-initdb.d

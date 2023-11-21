@@ -1,10 +1,10 @@
 package controllers
 
-import play.api.*
-import play.api.libs.json.*
-import play.api.mvc.*
+import play.api._
+import play.api.libs.json._
+import play.api.mvc._
 
-import javax.inject.*
+import javax.inject._
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
