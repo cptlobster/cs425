@@ -74,19 +74,27 @@ requested, they will be returned as a list of JSON objects.
 You can use POST requests to `/sql` with the SQL query in the body to execute SQL queries directly. This is solely as a
 fallback in case other functionality is not fully working.
 
-Results are returned as a list of JSON objects, with the row names as keys. For example, the table:
+Results are returned as a list of JSON objects, with the row names as keys. For example, with the table:
 
 | a | b | c |
 |---|---|---|
 | 0 | 1 | 2 |
 | 2 | 6 | 9 |
 
-would result in the following JSON:
+the query `SELECT * FROM table` would result in the following JSON:
 
 ```json
 [
   {"a": 0, "b": 1, "c": 2},
   {"a": 2, "b": 6, "c": 9}
+]
+```
+
+or `SELECT b, c FROM table WHERE b = 6` would result in the following JSON:
+
+```json
+[
+  {"b": 6, "c": 9}
 ]
 ```
 
@@ -96,10 +104,22 @@ The JSON structure of depots is as follows:
 {
   "id": 0,
   "city": "Lynchburg, VA",
-  "capacity": 2300.0,
-  "truck_spaces": 4,
-  "plane_spaces": 0,
-  "train_spaces": 2
+  "storage": {
+    "used": 120.4,
+    "capacity": 2300.0
+  },
+  "trucks": {
+    "parked": 3,
+    "capacity": 4
+  },
+  "planes": {
+    "parked": 0,
+    "capacity": 0
+  },
+  "trains": {
+    "parked": 1,
+    "capacity": 2
+  }
 }
 ```
 
@@ -110,7 +130,10 @@ The JSON structure of vehicles is as follows:
   "id": 0,
   "vehicle_type": "Truck",
   "range": 300,
-  "capacity": 200,
+  "storage": {
+    "used": 140,
+    "capacity": 200
+  },
   "status": "In Transit"
 }
 ```
@@ -135,6 +158,16 @@ stored in a depot.
 The JSON structure of timetable entries is as follows:
 ```json 
 {
-  
+  "id": 0,
+  "vehicle": 1,
+  "depot": {
+    "source": 0,
+    "dest": 4
+  },
+  "timestamps": {
+    "departure": "2023-11-01T06:25:00Z",
+    "arrival": "2023-11-01T12:40:00Z",
+    "delay": 0
+  }
 }
 ```
