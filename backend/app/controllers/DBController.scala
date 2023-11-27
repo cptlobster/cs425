@@ -6,12 +6,14 @@ import play.api.mvc._
 
 import javax.inject._
 
+import database.DatabaseConnector
+
 /**
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
  */
 @Singleton
-class DBController @Inject()(val controllerComponents: ControllerComponents) extends BaseController {
+class DBController @Inject()(val controllerComponents: ControllerComponents, db: DatabaseConnector) extends BaseController {
 
   /**
    * Create an Action to render an HTML page.
@@ -25,5 +27,11 @@ class DBController @Inject()(val controllerComponents: ControllerComponents) ext
       "query" -> s"SELECT * FROM $table"
     )
     Ok(return_val)
+  }
+
+  def query(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    val query = request.body.asText.get
+    val raw = db.query_with_result(query)
+    Ok(raw.map().asInstanceOf[JsArray])
   }
 }
