@@ -1,14 +1,6 @@
 version: '3.1'
 
 services:
-  frontend:
-    build: frontend
-    restart: always
-    ports:
-      - "8000:8000"
-    depends_on:
-      - backend
-
   backend:
     build: backend
     restart: always
