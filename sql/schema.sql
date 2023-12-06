@@ -4,7 +4,7 @@
 CREATE TABLE IF NOT EXISTS depots(
     id INT PRIMARY KEY NOT NULL,                      -- ID
     city VARCHAR(30) NOT NULL,                        -- Location
-    capacity NUMERIC(6, 2) NOT NULL,                  -- Capacity
+    capacity NUMERIC(10, 2) NOT NULL,                 -- Capacity
     truck_spaces INT,                                 -- Vehical Support 
     plane_spaces INT,                                 -- Vehical Support
     train_spaces INT                                  -- Vehical Support
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS fleet (
     id INT PRIMARY KEY NOT NULL,                      -- ID
     vehicle_type VARCHAR(10) NOT NULL,                -- Vehicle type (semi, tandem, airplane, train)
     rng INT NOT NULL,                                 -- Range
-    capacity NUMERIC(6, 2) NOT NULL,                  -- Capacity
+    capacity NUMERIC(8, 2) NOT NULL,                  -- Capacity
     stat VARCHAR(10) NOT NULL,                        -- Status (stored, traveling, loading, missing, stopped)
     destination INT NOT NULL REFERENCES depots(id)    -- Destination depot
 );
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS packages (
     dest INT NOT NULL REFERENCES depots(id),          -- Destination depot
     stat VARCHAR(10) NOT NULL,                        -- Status (stored, traveling, loading, missing, stopped)
     category VARCHAR(10) NOT NULL,                    -- Category
-    wght NUMERIC(6, 2) NOT NULL,                      -- Package weight
+    wght NUMERIC(8, 2) NOT NULL,                      -- Package weight
     declared_value NUMERIC(6, 2) NOT NULL,            -- Declared value (USD)
     vehicle_id INT REFERENCES fleet(id),              -- Vehicle ID
     depot_id INT REFERENCES depots(id)                -- Depots ID
