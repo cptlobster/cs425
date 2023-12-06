@@ -1,17 +1,17 @@
 # Test your FastAPI endpoints
 
-GET http://127.0.0.1:8000/
+GET http://127.0.0.1:9000/
 Accept: application/json
 
 ###
 
-POST http://127.0.0.1:8000/sql
+POST http://127.0.0.1:9000/sql
 Accept: application/json
 
 SELECT * FROM depots
 ###
 
-POST http://127.0.0.1:8000/sql/write
+POST http://127.0.0.1:9000/sql/write
 Accept: application/json
 
 INSERT INTO depots (id, city, capacity, truck_spaces, plane_spaces, train_spaces) VALUES (0, 'Chicago, IL', 2200, 20, 2, 8)
