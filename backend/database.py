@@ -6,10 +6,10 @@ def _open():
     Open a connection and a cursor on the database.
     :return: The :code:`Connection` and :code:`Cursor` object
     """
-    conn = psycopg2.connect(host="localhost",
+    conn = psycopg2.connect(host="postgres",
                             database="postgres",
                             user="postgres",
-                            password="Z!XQ$S#69o#x*r")
+                            password="fluffyunicorn")
     cur = conn.cursor()
     return conn, cur
 

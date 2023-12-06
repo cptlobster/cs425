@@ -8,11 +8,19 @@ services:
       - "9000:8000"
     depends_on:
       - postgres
+    networks:
+      - main
 
   postgres:
     build: sql
     restart: always
     environment:
-      POSTGRES_PASSWORD: 'Z!XQ$S#69o#x*r'
+      POSTGRES_PASSWORD: 'fluffyunicorn'
     ports:
       - "5432:5432"
+    networks:
+      - main
+
+networks:
+  main:
+    driver: bridge
