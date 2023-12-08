@@ -43,29 +43,29 @@ class project for CS425
 ## Tasks
 
 - Frontend
-  - [ ] Create project (basic HTML/CSS/JS? Node? Any frameworks?)
-  - [ ] Setup interface
+  - [x] Create project (basic HTML/CSS/JS? Node? Any frameworks?)
+  - [x] Setup interface
   - [ ] Connect backend API
 - Backend
-  - [x] Setup project (Play)
+  - [x] Setup project (Python/FastAPI)
   - [x] Define REST API routes
   - [x] Define data structures
-  - [ ] Low-level SQL API
-    - [ ] Connect Postgres database
-    - [ ] Read SQL query from POST request
-    - [ ] Return results
+  - [x] Low-level SQL API
+    - [x] Connect Postgres database
+    - [x] Read SQL query from POST request
+    - [x] Return results
   - [ ] High level REST API
     - [ ] Define SQL queries
     - [ ] Apply queries to API functions
     - [ ] Add error handling
 - Database
   - [x] Database Schema
-  - [ ] Connect backend to database
+  - [x] Connect backend to database
 - Integration
   - [x] Get Postgres working within Docker
-  - [ ] Setup backend Docker image
-    - [ ] Get Scala + SBT image working
-    - [ ] Ensure backend docker can connect with Postgres
+  - [x] Setup backend Docker image
+    - [x] Python
+    - [x] Ensure backend docker can connect with Postgres
   - [ ] Setup frontend Docker image
     - [ ] Ensure frontend can access backend API
-  - [ ] Docker Compose everything
+  - [x] Docker Compose everything

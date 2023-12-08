@@ -26,3 +26,13 @@ async def update(query: str = Body(...)):
         return q
     except Exception as e:
         return HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/packages")
+async def get_packages():
+    try:
+        q = db.read("SELECT * FROM packages WHERE status != 'Delivered'")
+        return q
+    except Exception as e:
+        return HTTPException(status_code=500, detail=str(e))
+
