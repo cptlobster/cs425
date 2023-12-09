@@ -20,18 +20,27 @@ function getTableAsJson(endpoint) {
 }
 
 /** UI Functions **/
-function view(packId) {
-      
-  alert("This is where the other action details will be at " + packId);
+function view_package(id) {
+  window.location.href = `./index.html?id=${id}`;
+}
+function view_vehicle(id) {
+  window.location.href = `./fleet.html?id=${id}`;
+}
+function view_depot(id) {
+  window.location.href = `./depots.html?id=${id}`;
+}
+function view_tt(id) {
+  window.location.href = `./tt.html?id=${id}`;
 }
 
+
 function popup() {
-  document.getElementById("newPackPopup").style.display = "block";
+  document.getElementById("newPopup").style.display = "block";
   document.getElementById("over").style.display = "block";
 }
 
 function closePopup() {
-  document.getElementById("newPackPopup").style.display = "none";
+  document.getElementById("newPopup").style.display = "none";
   document.getElementById("over").style.display = "none";
 }
 
@@ -47,21 +56,60 @@ function clearForm() {
 
 /** Tables **/
 function setup_packages() {
-  var results = getTableAsJson("/packages");
+  const QUERY_STRING = window.location.search;
+  const URL_PARAMS = new URLSearchParams(QUERY_STRING);
+  const TARGET_ID = URL_PARAMS.get('id');
+  const HAS_ID = URL_PARAMS.has('id');
+
+  if (HAS_ID) { var results = getTableAsJson(`/packages/${TARGET_ID}`); }
+  else { var results = getTableAsJson("/packages"); }
+
   var target = document.getElementById("packages_target");
+
   var newContent = "<table><thead><tr><th>ID</th><th>Destination</th><th>Status</th><th>Actions</th></tr></thead></tbody>";
   for (var i = 0; i < results.result.length; i++) {
     var row = results.result[i];
-    newContent += `<tr><td>${row.id}</td><td>${row.dest}</td><td>${row.status}</td><td></td></tr>`;
+    if (row.stat == "travel") {
+      var statmsg = `Travelling (Vehicle ${row.vehicle_id})`;
+    }
+    if (row.stat == "stored") {
+      var statmsg = `Stored at depot (Depot ${row.depot_id})`;
+    }
+    if (row.stat == "loading") {
+      var statmsg = `Loading (Vehicle ${row.vehicle_id})`;
+    }
+    if (row.stat == "delivered") {
+      var statmsg = `Delivered`;
+    }
+    if (row.stat == "missing") {
+      var statmsg = `Reported missing`;
+    }
+    buttons = ""
+    buttons += `<button onClick="view_package(${row.id})">View Package</button>`;
+    if (row.vehicle_id != null) {
+      buttons += `<button onClick="view_vehicle(${row.vehicle_id})">View Vehicle</button>`;
+    }
+    if (row.depot_id != null) {
+      buttons += `<button onClick="view_depot(${row.depot_id})">View Depot</button>`;
+    }
+    buttons += `<button onClick="deliver(${row.depot_id})">Deliver</button>`;
+    newContent += `<tr><td>${row.id}</td><td>${row.city} (${row.dest})</td><td>${statmsg}</td><td>${buttons}</td></tr>`;
   }
   newContent += "</tbody></table>";
   target.innerHTML = newContent;
 }
-setup_packages;
 
 function setup_depots() {
-  var results = getTableAsJson("/depots");
+  const QUERY_STRING = window.location.search;
+  const URL_PARAMS = new URLSearchParams(QUERY_STRING);
+  const TARGET_ID = URL_PARAMS.get('id');
+  const HAS_ID = URL_PARAMS.has('id');
+
+  if (HAS_ID) { var results = getTableAsJson(`/depots/${TARGET_ID}`); }
+  else { var results = getTableAsJson("/depots"); }
+
   var target = document.getElementById("depots_target");
+
   var newContent = "<table><thead><tr><th>ID</th><th>Location</th><th>Capacity</th><th>Vehicles</th><th>Actions</th></tr></thead><tbody>";
   for (var i = 0; i < results.result.length; i++) {
     var row = results.result[i];
@@ -81,17 +129,48 @@ function setup_depots() {
   target.innerHTML = newContent;
 }
 
-setup_depots();
-
 function setup_fleet() {
-  var results = getTableAsJson("/fleet");
+  const QUERY_STRING = window.location.search;
+  const URL_PARAMS = new URLSearchParams(QUERY_STRING);
+  const TARGET_ID = URL_PARAMS.get('id');
+  const HAS_ID = URL_PARAMS.has('id');
+
+  if (HAS_ID) { var results = getTableAsJson(`/fleet/${TARGET_ID}`); }
+  else { var results = getTableAsJson("/fleet"); }
+
   var target = document.getElementById("fleet_target");
+
   var newContent = "<table><thead><tr><th>ID</th><th>Vehicle Type</th><th>Range</th><th>Capacity</th><th>Status</th><th>Destination</th><th>Actions</th></tr></thead><tbody>";
   for (var i = 0; i < results.result.length; i++) {
     var row = results.result[i];
-    newContent += `<tr><td>${row.id}</td><td>${row.vehicle_type}</td><td>${row.usage} / ${row.capacity} kg</td><td>${row.status}</td><td>${row.dest}</td><td></td></tr>`;
+    if (row.stat == "travel") {
+      var statmsg = `Travelling`;
+    }
+    if (row.stat == "parked") {
+      var statmsg = `Parked`;
+    }
+    if (row.stat == "loading") {
+      var statmsg = `Loading`;
+    }
+
+    newContent += `<tr><td>${row.id}</td><td>${row.vehicle_type}</td><td>${row.rng} km</td><td>${row.usage} / ${row.capacity} kg</td><td>${statmsg}</td><td>${row.city} (${row.destination})</td><td></td></tr>`;
   }
   newContent += "</tbody></table>";
   target.innerHTML = newContent;
 }
-setup_fleet();
+
+function depot_dropdown() {
+  var elements = document.getElementsByClassName("depots_dropdown");
+  var results = getTableAsJson("/depots");
+
+  var newContent = "";
+  for (var i = 0; i < results.result.length; i++) {
+    var row = results.result[i];
+    newContent += `<option value="${row.id}">${row.city}</option>`;
+  }
+
+  for (i = 0; i < elements.length; i++) {
+    var el = elements[i];
+    el.innerHTML = newContent;
+  }
+}
