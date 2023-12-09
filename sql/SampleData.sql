@@ -19,13 +19,13 @@ INSERT INTO fleet
 VALUES (1, 'semi', 1100, 25000, 'travel', 2);
 
 INSERT INTO fleet
-VALUES (2, 'tandem', 2400, 23000, 'stored', 3);
+VALUES (2, 'tandem', 2400, 23000, 'parked', 3);
 
 INSERT INTO fleet
 VALUES (3, 'airplane', 160000, 78000, 'loading', 1);
 
 INSERT INTO fleet
-VALUES (4, 'train', 260000, 9000000, 'rest', 5);
+VALUES (4, 'train', 260000, 9000000, 'parked', 5);
 
 INSERT INTO fleet
 VALUES (5, 'train', 200000, 8500000, 'travel', 4);
@@ -41,7 +41,7 @@ INSERT INTO packages
 VALUES (3, 2, 'travel', 'clothing', 5, 550, 1, NULL);
 
 INSERT INTO packages
-VALUES (4, 5, 'rest', 'furniture', 80, 3000, 4, 2);
+VALUES (4, 5, 'stored', 'furniture', 80, 3000, 4, 2);
 
 INSERT INTO packages
 VALUES (5, 1, 'loading', 'skincare', 5, 350, 3, 5);
