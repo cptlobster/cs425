@@ -19,6 +19,14 @@ function getTableAsJson(endpoint) {
   return result;
 }
 
+function search(endpoint) {
+  const QUERY_STRING = window.location.search;
+  const URL_PARAMS = new URLSearchParams(QUERY_STRING);
+  const TARGET_ID = URL_PARAMS.get('id');
+
+  window.location.href = `./${endpoint}.html?id=${TARGET_ID}`;
+}
+
 /** UI Functions **/
 function view_package(id) {
   window.location.href = `./index.html?id=${id}`;
@@ -34,13 +42,21 @@ function view_tt(id) {
 }
 
 
-function popup() {
-  document.getElementById("newPopup").style.display = "block";
+function popup_new() {
+  document.getElementById("new_popup").style.display = "block";
   document.getElementById("over").style.display = "block";
 }
 
-function closePopup() {
-  document.getElementById("newPopup").style.display = "none";
+function popup_update() {
+  document.getElementById("update_popup").style.display = "block";
+  document.getElementById("over").style.display = "block";
+}
+
+function close_popups() {
+  popups = document.getElementsByClassName("popup");
+  for (i = 0; i < popups.length; i++) {
+    popups[i].style.display = "none";
+  }
   document.getElementById("over").style.display = "none";
 }
 
@@ -92,7 +108,7 @@ function setup_packages() {
     if (row.depot_id != null) {
       buttons += `<button onClick="view_depot(${row.depot_id})">View Depot</button>`;
     }
-    buttons += `<button onClick="deliver(${row.depot_id})">Deliver</button>`;
+    buttons += `<button onClick="popup_update(${row.depot_id})">Update</button>`;
     newContent += `<tr><td>${row.id}</td><td>${row.city} (${row.dest})</td><td>${statmsg}</td><td>${buttons}</td></tr>`;
   }
   newContent += "</tbody></table>";
@@ -123,7 +139,13 @@ function setup_depots() {
     if (row.plane_spaces > 0) {
       vehicles += `${row.planes} / ${row.plane_spaces} planes<br />`;
     }
-    newContent += `<tr><td>${row.id}</td><td>${row.city}</td><td>${row.usage} / ${row.capacity} kg</td><td>${vehicles}</td><td></td></tr>`;
+
+    buttons = ""
+    buttons += `<button onClick="view_depot(${row.id})">View Depot</button>`;
+    buttons += `<button onClick="view_packages_at_depot(${row.id})">View Packages</button>`;
+    buttons += `<button onClick="view_vehicles(${row.id})">View Vehicles</button>`;
+    buttons += `<button onClick="popup_update(${row.depot_id})">Update</button>`;
+    newContent += `<tr><td>${row.id}</td><td>${row.city}</td><td>${row.usage} / ${row.capacity} kg</td><td>${vehicles}</td><td>${buttons}</td></tr>`;
   }
   newContent += "</tbody></table>";
   target.innerHTML = newContent;
@@ -159,6 +181,36 @@ function setup_fleet() {
   target.innerHTML = newContent;
 }
 
+function setup_tt() {
+  const QUERY_STRING = window.location.search;
+  const URL_PARAMS = new URLSearchParams(QUERY_STRING);
+  const TARGET_ID = URL_PARAMS.get('id');
+  const HAS_ID = URL_PARAMS.has('id');
+
+  if (HAS_ID) { var results = getTableAsJson(`/tt/${TARGET_ID}`); }
+  else { var results = getTableAsJson("/tt"); }
+
+  var target = document.getElementById("tt_target");
+
+  var newContent = "<table><thead><tr><th>ID</th><th>Vehicle ID</th><th>Departure</th><th>Arrival</th><th>Status</th><th>Actions</th></tr></thead><tbody>";
+  for (var i = 0; i < results.result.length; i++) {
+    var row = results.result[i];
+    if (row.diff == 0) {
+      var statmsg = "On time"
+    }
+    else if (row.diff > 0) {
+      var statmsg = "Late"
+    }
+    else {
+      var statmsg = "Early"
+    }
+
+    newContent += `<tr><td>${row.id}</td><td>${row.fleet_id}</td><td>${row.departure}<br />${row.source_city} (${row.source})</td><td>${row.arrival}<br />${row.dest_city} (${row.dest})</td><td>${statmsg}</td><td></td></tr>`;
+  }
+  newContent += "</tbody></table>";
+  target.innerHTML = newContent;
+}
+
 function depot_dropdown() {
   var elements = document.getElementsByClassName("depots_dropdown");
   var results = getTableAsJson("/depots");
@@ -167,6 +219,22 @@ function depot_dropdown() {
   for (var i = 0; i < results.result.length; i++) {
     var row = results.result[i];
     newContent += `<option value="${row.id}">${row.city}</option>`;
+  }
+
+  for (i = 0; i < elements.length; i++) {
+    var el = elements[i];
+    el.innerHTML = newContent;
+  }
+}
+
+function vehicle_dropdown() {
+  var elements = document.getElementsByClassName("fleet_dropdown");
+  var results = getTableAsJson("/vehicles");
+
+  var newContent = "";
+  for (var i = 0; i < results.result.length; i++) {
+    var row = results.result[i];
+    newContent += `<option value="${row.id}">${row.id}: ${row.vehicle_type} (To: ${row.city})</option>`;
   }
 
   for (i = 0; i < elements.length; i++) {
