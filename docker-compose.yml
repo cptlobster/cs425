@@ -21,6 +21,6 @@ services:
     build: sql
     restart: always
     environment:
-      POSTGRES_PASSWORD: 'Z!XQ$S#69o#x*r'
+      POSTGRES_PASSWORD: 'fluffyunicorn'
     ports:
       - "5432:5432"
