@@ -1,13 +1,54 @@
 :root {
+    --body-bg: hsl(200, 20%, 10%);
     --bg: hsl(200, 20%, 20%);
     --accent: hsl(200, 20%, 40%);
     --text: hsl(200, 20%, 100%);
 }
 
-body {
-    margin: 20px;
-    background-color: var(--bg);
+a, a:visited {
     color: var(--text);
+}
+
+body {
+    min-width: 100%;
+    min-height: 100%;
+    background-color: var(--body-bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: stretch;
+}
+
+main {
+    background-color: var(--bg);
+    flex: 6 0 30rem;
+    padding: 1rem;
+}
+
+nav {
+    flex: 0 1 10rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+nav ul li {
+    text-align: right;
+    padding: 4px 12px;
+    background-color: var(--bg);
+    width: 100%;
+    border-radius: 4px 0 0 4px;
 }
 
 table {
