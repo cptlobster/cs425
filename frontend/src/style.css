@@ -1,5 +1,13 @@
+:root {
+    --bg: hsl(200, 20%, 20%);
+    --accent: hsl(200, 20%, 40%);
+    --text: hsl(200, 20%, 100%);
+}
+
 body {
     margin: 20px;
+    background-color: var(--bg);
+    color: var(--text);
 }
 
 table {
@@ -9,14 +17,14 @@ table {
 }
 
 th, td {
-    border: 1px solid #ddd;
+    border: 1px solid var(--accent);
     padding: 8px;
     text-align: left;
 text-align:center;
 }
 
 th {
-background-color: lightgray;
+background-color: var(--accent);
 text-align:center;
 }
 
@@ -27,8 +35,8 @@ button {
 
 .popup {
 padding: 20px;
-background: #fff;
-border: 1px solid #ccc;
+background: var(--bg);
+border: 1px solid var(--accent);
 z-index: 1;
     display: none;
     position: fixed;
