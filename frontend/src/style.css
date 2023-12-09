@@ -33,6 +33,12 @@ button {
     cursor: pointer;
     background-color: var(--bg);
     border: 1px solid var(--accent);
+    border-radius: 4px;
+    color: var(--text);
+}
+
+button:hover {
+    background-color: var(--accent);
 }
 
 .popup {
