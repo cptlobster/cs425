@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Fleet</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">Packages</a></li>
+      <li>Fleet</li>
+      <li><a href="depots.html">Depots</a></li>
+      <li><a href="tt.html">Timetable</a></li>
+    </ul>
+    <ul>
+      <li><a href="customers.html">Customers</a></li>
+      <li><a href="orders.html">Orders</a></li>
+      <li><a href="transactions.html">Transactions</a></li>
+    </ul>
+  </nav>
+  <main>
+    <!-- Fleet section -->
+    <h2>Fleet</h2>
+    <div id="fleet_target"></div>
+    <button onclick="popup()">New Vehicle</button>
+  </main>
+  
+  <!-- Popup with form -->
+  <div class="over" id="over"></div>
+  <div class="popup" id="newPackPopup">
+    <h3>New Package Form</h3>
+    <form id="newPackForm">
+      <label for="address">Address:</label>
+      <input type="text" id="address" name="address" required><br>
+      
+      <label for="city">City:</label>
+      <input type="text" id="city" name="city" required><br>
+      
+      <label for="state">State:</label>
+      <input type="text" id="state" name="state" required><br>
+      
+      <label for="zip">Zip:</label>
+      <input type="text" id="zip" name="zip" ><br>
+      
+      <label for="sourceDepot">Source Depot:</label>
+      <select id ="sourceDepot" class="depots_dropdown" name="sourceDepot" required>
+      </select><br>
+      
+      <label for="category">Category:</label>
+      <input type="text" id="category" name="category" required><br>
+      
+      <label for="weight">Weight</label>
+      <input type="number" id="weight" name="weight" step="0.1" required><br>
+      
+      <label for="decl">Declared Value ($):</label>
+      <input type="number" id="decl" name="decl" step="0.01" required><br>
+      
+      <button type="button" onclick="submit()">Submit Form</button>
+      <button type="button" onclick="clearForm()">Clear Form</button>
+    </form>
+  </div>
+  
+  <script src = "script.js"></script>
+  <script>
+    setup_fleet();
+  </script>
+</body>
+</html>
