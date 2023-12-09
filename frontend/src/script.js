@@ -57,6 +57,7 @@ function setup_packages() {
   newContent += "</tbody></table>";
   target.innerHTML = newContent;
 }
+setup_packages;
 
 function setup_depots() {
   var results = getTableAsJson("/depots");
@@ -81,3 +82,16 @@ function setup_depots() {
 }
 
 setup_depots();
+
+function setup_fleet() {
+  var results = getTableAsJson("/fleet");
+  var target = document.getElementById("fleet_target");
+  var newContent = "<table><thead><tr><th>ID</th><th>Vehicle Type</th><th>Range</th><th>Capacity</th><th>Status</th><th>Destination</th><th>Actions</th></tr></thead><tbody>";
+  for (var i = 0; i < results.result.length; i++) {
+    var row = results.result[i];
+    newContent += `<tr><td>${row.id}</td><td>${row.vehicle_type}</td><td>${row.usage} / ${row.capacity} kg</td><td>${row.status}</td><td>${row.dest}</td><td></td></tr>`;
+  }
+  newContent += "</tbody></table>";
+  target.innerHTML = newContent;
+}
+setup_fleet();

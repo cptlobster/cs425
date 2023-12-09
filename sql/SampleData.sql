@@ -1,18 +1,18 @@
 -- Table for depots
 INSERT INTO Depots
-VALUES (1,'chicago', 100000, 15, 1, 2);
+VALUES (1,'Chicago', 100000, 15, 1, 2);
 
 INSERT INTO Depots
-VALUES (2, 'new york city', 200000, 15, 0, 3);
+VALUES (2, 'New York City', 200000, 15, 0, 3);
 
 INSERT INTO Depots
-VALUES (3, 'richmond',  250000, 10, 2, 5);
+VALUES (3, 'Richmond',  250000, 10, 2, 5);
 
 INSERT INTO Depots
-VALUES (4, 'san diego', 430000, 20, 1, 2);
+VALUES (4, 'San Diego', 430000, 20, 1, 2);
 
 INSERT INTO Depots
-VALUES (5, 'dayton', 560000, 10, 0, 0);
+VALUES (5, 'Dayton', 560000, 10, 0, 0);
 
 -- Table for fleet
 INSERT INTO fleet
