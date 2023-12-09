@@ -5,10 +5,8 @@ Accept: application/json
 
 ###
 
-POST http://127.0.0.1:9000/sql
+GET http://127.0.0.1:9000/depots/
 Accept: application/json
-
-SELECT * FROM depots
 ###
 
 POST http://127.0.0.1:9000/sql/write
