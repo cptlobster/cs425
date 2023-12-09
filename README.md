@@ -36,9 +36,7 @@ class project for CS425
     - [ ] Reschedule
     - [ ] Reassign vehicle
     - [ ] Update destination
-- Trip planner (optional)
-  - [ ] Input source/destination depots
-  - [ ] Return path defined in timetable
+
 
 ## Tasks
 
