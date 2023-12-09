@@ -2,7 +2,7 @@
 -- For more information, check the ER Diagram in /drawio/entityrelation.drawio
 
 CREATE TABLE IF NOT EXISTS depots(
-    id INT PRIMARY KEY NOT NULL,                      -- ID
+    id SERIAL PRIMARY KEY NOT NULL,                   -- ID
     city VARCHAR(30) NOT NULL,                        -- Location
     capacity NUMERIC(10, 2) NOT NULL,                 -- Capacity
     truck_spaces INT,                                 -- Vehical Support 
@@ -11,16 +11,16 @@ CREATE TABLE IF NOT EXISTS depots(
 );
 
 CREATE TABLE IF NOT EXISTS fleet (
-    id INT PRIMARY KEY NOT NULL,                      -- ID
+    id SERIAL PRIMARY KEY NOT NULL,                   -- ID
     vehicle_type VARCHAR(10) NOT NULL,                -- Vehicle type (semi, tandem, airplane, train)
     rng INT NOT NULL,                                 -- Range
-    capacity NUMERIC(10, 2) NOT NULL,                  -- Capacity
+    capacity NUMERIC(10, 2) NOT NULL,                 -- Capacity
     stat VARCHAR(10) NOT NULL,                        -- Status (stored, traveling, loading, missing, stopped)
     destination INT NOT NULL REFERENCES depots(id)    -- Destination depot
 );
 
 CREATE TABLE IF NOT EXISTS packages (
-    id INT PRIMARY KEY NOT NULL,                      -- ID
+    id SERIAL PRIMARY KEY NOT NULL,                   -- ID
     dest INT NOT NULL REFERENCES depots(id),          -- Destination depot
     stat VARCHAR(10) NOT NULL,                        -- Status (stored, traveling, loading, missing, stopped)
     category VARCHAR(10) NOT NULL,                    -- Category
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS packages (
 );
 
 CREATE TABLE IF NOT EXISTS customers (
-    id INT PRIMARY KEY NOT NULL,                      -- Customer ID
+    id SERIAL PRIMARY KEY NOT NULL,                   -- Customer ID
     nme VARCHAR(100) NOT NULL,                        -- Customer Name
     bill_address VARCHAR(200) NOT NULL,               -- Billing Address
     email VARCHAR(50) NOT NULL,                       -- Email address (primary point of contact)
@@ -39,14 +39,14 @@ CREATE TABLE IF NOT EXISTS customers (
 );
 
 CREATE TABLE IF NOT EXISTS orders(
-    id INT PRIMARY KEY NOT NULL,                      -- Order
+    id SERIAL PRIMARY KEY NOT NULL,                   -- Order
     cost NUMERIC(6, 2) NOT NULL,                      -- Cost
     customer_id INT NOT NULL REFERENCES customers(id),-- Customer ID
     package_id INT NOT NULL REFERENCES packages(id)   -- Package ID
 );
 
 CREATE TABLE IF NOT EXISTS transactions (
-    id INT PRIMARY KEY NOT NULL,
+    id SERIAL PRIMARY KEY NOT NULL,
     customer_id INT NOT NULL REFERENCES customers(id),-- Customer ID
     order_id INT NOT NULL,                            -- Order ID
     pmt_method VARCHAR(10) NOT NULL,                  -- Payment method (card, check, direct)
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS transactions (
 );
 
 CREATE TABLE IF NOT EXISTS timetable (
-    id INT PRIMARY KEY NOT NULL,
+    id SERIAL PRIMARY KEY NOT NULL,
     fleet_id INT NOT NULL REFERENCES fleet(id),       -- Fleet ID
     source INT NOT NULL REFERENCES depots(id),        -- Depots ID
     dest INT NOT NULL REFERENCES depots(id) 

@@ -1,18 +1,18 @@
 -- Table for depots
-INSERT INTO Depots
-VALUES (1,'Chicago', 100000, 15, 1, 2);
+INSERT INTO Depots (city, capacity, truck_spaces, plane_spaces, train_spaces)
+VALUES ('Chicago', 100000, 15, 1, 2);
 
-INSERT INTO Depots
-VALUES (2, 'New York City', 200000, 15, 0, 3);
+INSERT INTO Depots (city, capacity, truck_spaces, plane_spaces, train_spaces)
+VALUES ('New York City', 200000, 15, 0, 3);
 
-INSERT INTO Depots
-VALUES (3, 'Richmond',  250000, 10, 2, 5);
+INSERT INTO Depots (city, capacity, truck_spaces, plane_spaces, train_spaces)
+VALUES ('Richmond',  250000, 10, 2, 5);
 
-INSERT INTO Depots
-VALUES (4, 'San Diego', 430000, 20, 1, 2);
+INSERT INTO Depots (city, capacity, truck_spaces, plane_spaces, train_spaces)
+VALUES ('San Diego', 430000, 20, 1, 2);
 
-INSERT INTO Depots
-VALUES (5, 'Dayton', 560000, 10, 0, 0);
+INSERT INTO Depots (city, capacity, truck_spaces, plane_spaces, train_spaces)
+VALUES ('Dayton', 560000, 10, 0, 0);
 
 -- Table for fleet
 INSERT INTO fleet
