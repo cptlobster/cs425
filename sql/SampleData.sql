@@ -16,19 +16,19 @@ VALUES ('Dayton', 560000, 10, 0, 0);
 
 -- Table for fleet
 INSERT INTO fleet
-VALUES (1, 'semi', 1100, 25000, 'travel', 2);
+VALUES (1, 'Semi', 1100, 25000, 'travel', 2);
 
 INSERT INTO fleet
-VALUES (2, 'tandem', 2400, 23000, 'parked', 3);
+VALUES (2, 'Tandem', 2400, 23000, 'parked', 3);
 
 INSERT INTO fleet
-VALUES (3, 'airplane', 160000, 78000, 'loading', 1);
+VALUES (3, 'Airplane', 160000, 78000, 'loading', 1);
 
 INSERT INTO fleet
-VALUES (4, 'train', 260000, 9000000, 'parked', 5);
+VALUES (4, 'Train', 260000, 9000000, 'parked', 5);
 
 INSERT INTO fleet
-VALUES (5, 'train', 200000, 8500000, 'travel', 4);
+VALUES (5, 'Train', 200000, 8500000, 'travel', 4);
 
 -- Table for packages
 INSERT INTO packages
