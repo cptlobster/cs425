@@ -2,9 +2,11 @@
 This documentation explains how to utilize the REST API for the backend.
 
 # Launching
-To run locally, install some flavor of OpenJDK 21, as well as SBT. You can launch the API using:
+First, install Python and setup a virtual environment:
 ```shell
-sbt run
+python -m venv venv
+source venv/bin/activate # for UNIX (i.e. Mac, Linux)
+.\venv\Scripts\activate.bat # for Windows
 ```
 
 To run within Docker (easier), use the following to build:
