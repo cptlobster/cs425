@@ -321,7 +321,7 @@ function setup_packages() {
 
   if (HAS_ID) { var results = getTableAsJson(`/packages/${TARGET_ID}`); }
   else if (HAS_DEPOT) { var results = getTableAsJson(`/depots/${TARGET_DEPOT}/packages`); }
-  else if (HAS_VEHICLE) { var results = getTableAsJson(`/depots/${TARGET_VEHICLE}/packages`); }
+  else if (HAS_VEHICLE) { var results = getTableAsJson(`/fleet/${TARGET_VEHICLE}/packages`); }
   else { var results = getTableAsJson("/packages"); }
 
   var target = document.getElementById("packages_target");
