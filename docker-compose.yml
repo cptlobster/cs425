@@ -5,7 +5,7 @@ services:
     build: frontend
     restart: always
     ports:
-      - "8000:8000"
+      - "8000:80"
     depends_on:
       - backend
 

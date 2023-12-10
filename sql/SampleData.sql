@@ -126,3 +126,16 @@ VALUES (3, 5, 819 );
 
 INSERT INTO distances
 VALUES (2, 4, 4443 );
+
+-- IGNORE THIS
+-- THIS IS NECESSARY TO FIX THE IDS
+
+-- because for some reason Postgres doesn't update the serial stuff when we make the DB in an SQL file, we have to
+-- do it manually here. Apparently single queries from an application work without it, weird
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"packages"', 'id')), (SELECT (MAX("id") + 1) FROM "packages"), FALSE);
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"fleet"', 'id')), (SELECT (MAX("id") + 1) FROM "fleet"), FALSE);
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"depots"', 'id')), (SELECT (MAX("id") + 1) FROM "depots"), FALSE);
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"timetable"', 'id')), (SELECT (MAX("id") + 1) FROM "timetable"), FALSE);
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"customers"', 'id')), (SELECT (MAX("id") + 1) FROM "customers"), FALSE);
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"transactions"', 'id')), (SELECT (MAX("id") + 1) FROM "transactions"), FALSE);
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"orders"', 'id')), (SELECT (MAX("id") + 1) FROM "orders"), FALSE);

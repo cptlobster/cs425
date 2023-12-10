@@ -11,7 +11,7 @@
   <nav>
     <ul>
       <li><a href="index.html">Packages</a></li>
-      <li class="active">Fleet</li>
+      <li class="active"><a href="fleet.html">Fleet</a></li>
       <li><a href="depots.html">Depots</a></li>
       <li><a href="tt.html">Timetable</a></li>
     </ul>
@@ -37,24 +37,25 @@
     <h2>New Package Form</h2>
     <button class="popup_close" onclick="close_popups()">X</button>
     <form id="new_form">
-      <label for="sourceDepot">Source Depot:</label>
-      <select id ="sourceDepot" class="depots_dropdown" name="sourceDepot" required>
+      <label for="depot">Source Depot:</label>
+      <select id ="depot" class="depots_dropdown" name="depot" required>
       </select><br>
       
-      <label for="sourceDepot">Source Depot:</label>
-      <select id ="sourceDepot" class="depots_dropdown" name="sourceDepot" required>
+      <label for="type">Vehicle Type:</label>
+      <select id ="type" name="type" required>
+        <option name="truck">Semi Truck</option>
+        <option name="tandem">Tandem Semi Truck</option>
+        <option name="train">Train</option>
+        <option name="plane">Airplane</option>
       </select><br>
       
-      <label for="category">Category:</label>
-      <input type="text" id="category" name="category" required><br>
+      <label for="capacity">Capacity</label>
+      <input type="number" id="capacity" name="capacity" step="0.1" required> kg<br>
       
-      <label for="weight">Weight</label>
-      <input type="number" id="weight" name="weight" step="0.1" required><br>
+      <label for="range">Range:</label>
+      <input type="number" id="range" name="range" step="1" required> km<br>
       
-      <label for="decl">Declared Value ($):</label>
-      <input type="number" id="decl" name="decl" step="0.01" required><br>
-      
-      <button type="button" onclick="submit()">Submit Form</button>
+      <button type="button" onclick="insert_vehicle()">Submit Form</button>
       <button type="button" onclick="clearForm()">Clear Form</button>
     </form>
   </div>
@@ -63,23 +64,26 @@
     <h2>Update Package</h2>
     <button class="popup_close" onclick="close_popups()">X</button>
     <form id="update_form">
-      <label for="id">ID</label>
-      <input type="number" id="update_id" name="id" disabled required><br>
+      <label for="update_id">ID</label>
+      <input type="number" id="update_id" name="update_id" readonly required><br>
       
       <label for="depot">Depot:</label>
       <select id ="depot" class="depots_dropdown" name="depot" required>
+        <option value="unchanged" selected>Unchanged</option>
       </select><br>
+
+      <label for="capacity">Capacity: </label>
+      <input type="number" id="capacity" name="capacity" step="0.1" required> kg<br>
       
       <label for="status">Status:</label>
       <select id ="status" name="status" required>
-        <option value="stored">Stored at Depot</option>
+        <option value="unchanged" selected>Unchanged</option>
+        <option value="stored">Parked</option>
         <option value="loading">Loading</option>
         <option value="travel">Travelling</option>
-        <option value="delivered">Delivered</option>
-        <option value="missing">Missing</option>
       </select><br>
       
-      <button type="button" onclick="submit()">Submit Form</button>
+      <button type="button" onclick="update_vehicle()">Submit Form</button>
       <button type="button" onclick="clearForm()">Clear Form</button>
     </form>
   </div>
@@ -87,6 +91,8 @@
   <script src = "script.js"></script>
   <script>
     setup_fleet();
+    depot_dropdown();
+    fleet_dropdown();
   </script>
 </body>
 </html>

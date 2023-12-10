@@ -12,7 +12,7 @@
     <ul>
       <li><a href="index.html">Packages</a></li>
       <li><a href="fleet.html">Fleet</a></li>
-      <li class="active">Depots</li>
+      <li class="active"><a href="depots.html">Depots</a></li>
       <li><a href="tt.html">Timetable</a></li>
     </ul>
     <ul>
@@ -34,35 +34,23 @@
   <!-- Popup with form -->
   <div class="over" id="over"></div>
   <div class="popup new_popup" id="new_popup">
-    <h2>New Package Form</h2>
+    <h2>New Depot Form</h2>
     <button class="popup_close" onclick="close_popups()">X</button>
     <form id="new_form">
-      <label for="address">Address:</label>
-      <input type="text" id="address" name="address" required><br>
-      
-      <label for="city">City:</label>
+      <label for="city">City: </label>
       <input type="text" id="city" name="city" required><br>
       
-      <label for="state">State:</label>
-      <input type="text" id="state" name="state" required><br>
+      <label for="capacity">Capacity: </label>
+      <input type="number" id="capacity" name="capacity" step="0.1" required> kg<br>
       
-      <label for="zip">Zip:</label>
-      <input type="text" id="zip" name="zip" ><br>
+      <label for="truck_spaces">Trucks: </label>
+      <input type="number" class="short" id="truck_spaces" name="truck_spaces" step="1" required>
+      <label for="train_spaces">Trains: </label>
+      <input type="number" class="short" id="train_spaces" name="train_spaces" step="1" required>
+      <label for="plane_spaces">Planes: </label>
+      <input type="number" class="short" id="plane_spaces" name="plane_spaces" step="1" required><br>
       
-      <label for="sourceDepot">Source Depot:</label>
-      <select id ="sourceDepot" class="depots_dropdown" name="sourceDepot" required>
-      </select><br>
-      
-      <label for="category">Category:</label>
-      <input type="text" id="category" name="category" required><br>
-      
-      <label for="weight">Weight</label>
-      <input type="number" id="weight" name="weight" step="0.1" required><br>
-      
-      <label for="decl">Declared Value ($):</label>
-      <input type="number" id="decl" name="decl" step="0.01" required><br>
-      
-      <button type="button" onclick="submit()">Submit Form</button>
+      <button type="button" onclick="insert_depot()">Submit Form</button>
       <button type="button" onclick="clearForm()">Clear Form</button>
     </form>
   </div>
@@ -72,22 +60,17 @@
     <button class="popup_close" onclick="close_popups()">X</button>
     <form id="update_form">
       <label for="id">ID</label>
-      <input type="number" id="update_id" name="id" disabled required><br>
-      
-      <label for="depot">Depot:</label>
-      <select id ="depot" class="depots_dropdown" name="depot" required>
-      </select><br>
-      
-      <label for="status">Status:</label>
-      <select id ="status" name="status" required>
-        <option value="stored">Stored at Depot</option>
-        <option value="loading">Loading</option>
-        <option value="travel">Travelling</option>
-        <option value="delivered">Delivered</option>
-        <option value="missing">Missing</option>
-      </select><br>
-      
-      <button type="button" onclick="submit()">Submit Form</button>
+      <input type="number" id="update_id" name="id" readonly required><br>
+      <label for="capacity">Capacity: </label>
+      <input type="number" id="capacity" name="capacity" step="0.1" required> kg<br>
+      <label for="truck_spaces">Trucks: </label>
+      <input type="number" class="short" id="truck_spaces" name="truck_spaces" step="1" required>
+      <label for="train_spaces">Trains: </label>
+      <input type="number" class="short" id="train_spaces" name="train_spaces" step="1" required>
+      <label for="plane_spaces">Planes: </label>
+      <input type="number" class="short" id="plane_spaces" name="plane_spaces" step="1" required><br>
+
+      <button type="button" onclick="update_depot()">Submit Form</button>
       <button type="button" onclick="clearForm()">Clear Form</button>
     </form>
   </div>
@@ -95,6 +78,8 @@
   <script src = "script.js"></script>
   <script>
     setup_depots();
+    depot_dropdown();
+    fleet_dropdown();
   </script>
 </body>
 </html>

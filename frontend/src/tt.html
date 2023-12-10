@@ -13,7 +13,7 @@
       <li><a href="index.html">Packages</a></li>
       <li><a href="fleet.html">Fleet</a></li>
       <li><a href="depots.html">Depots</a></li>
-      <li class="active">Timetable</li>
+      <li class="active"><a href="tt.html">Timetable</a></li>
     </ul>
     <ul>
       <li><a href="customers.html">Customers</a></li>
@@ -28,7 +28,7 @@
       <input id="search_id" type="text" name="id" /><button type="submit" >Search</button></form>
     </form>
     <div id="tt_target"></div>
-    <button onclick="popup()">New Timecard</button>
+    <button onclick="popup_new()">New Timecard</button>
   </main>
   
   <!-- Popup with form -->
@@ -55,7 +55,7 @@
       <label for="departure">Arrival:</label>
       <input type="datetime-local" id="arrival" name="arrival" required><br />
       
-      <button type="button" onclick="submit()">Submit Form</button>
+      <button type="button" onclick="insert_tt()">Submit Form</button>
       <button type="button" onclick="clearForm()">Clear Form</button>
     </form>
   </div>
@@ -64,23 +64,40 @@
     <h2>Update Package</h2>
     <button class="popup_close" onclick="close_popups()">X</button>
     <form id="update_form">
-      <label for="id">ID</label>
-      <input type="number" id="update_id" name="id" disabled required><br>
+      <label for="update_id">ID</label>
+      <input type="number" id="update_id" name="update_id" readonly required><br>
       
-      <label for="depot">Depot:</label>
-      <select id ="depot" class="depots_dropdown" name="depot" required>
-      </select><br>
+        <label for="fleet">Vehicle:</label>
+        <select id ="fleet" class="fleet_dropdown" name="fleet" required>
+          <option value="unchanged" selected>Unchanged</option>
+        </select><br>
+  
+        <label for="source">Source Depot:</label>
+        <select id ="source" class="depots_dropdown" name="source" required>
+          <option value="unchanged" selected>Unchanged</option>
+        </select><br>
+        
+        <label for="dest">Destination Depot:</label>
+        <select id ="dest" class="depots_dropdown" name="dest" required>
+          <option value="unchanged" selected>Unchanged</option>
+        </select><br>
+  
+        <em>Note: It is discouraged to alter the dates directly. If there is a change in expected arrival time, use the difference field below.</em><br />
+        <label for="departure">Departure:</label>
+        <input type="datetime-local" id="departure" name="departure" required><br />
+        
+        <label for="departure">Arrival:</label>
+        <input type="datetime-local" id="arrival" name="arrival" required><br />  
       
-      <label for="status">Status:</label>
-      <select id ="status" name="status" required>
-        <option value="stored">Stored at Depot</option>
-        <option value="loading">Loading</option>
-        <option value="travel">Travelling</option>
-        <option value="delivered">Delivered</option>
-        <option value="missing">Missing</option>
-      </select><br>
-      
-      <button type="button" onclick="submit()">Submit Form</button>
+        <label for="diff_num">Difference:</label>
+        <input type="number" id="diff_num" name="diff_num"><br />
+        <select id="diff_unit" name="diff_unit">
+          <option value="seconds">Seconds</option>
+          <option value="minutes">Minutes</option>
+          <option value="hours">Hours</option>
+          <option value="days">Days</option>
+        </select>
+      <button type="button" onclick="update_tt()">Submit Form</button>
       <button type="button" onclick="clearForm()">Clear Form</button>
     </form>
   </div>
@@ -88,6 +105,8 @@
   <script src = "script.js"></script>
   <script>
     setup_tt();
+    depot_dropdown();
+    fleet_dropdown();
   </script>
 </body>
 </html>

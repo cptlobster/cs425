@@ -99,6 +99,7 @@ button:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    max-width: 25rem;
 }
 
 .popup_close {
@@ -118,7 +119,7 @@ button:hover {
     background-color: hsla(200, 20%, 10%, 50%);
 }
 
-input {
+input, select {
     padding: 4px 8px;
     background-color: var(--bg);
     border: 1px solid var(--accent);
@@ -126,10 +127,14 @@ input {
     color: var(--text);
 }
 
-input:hover {
+input:hover, select:hover {
     background-color: var(--accent);
 }
 
-input:focus {
+input:focus, select:focus {
     border: 1px solid var(--text);
+}
+
+input.short {
+    width: 50px;
 }

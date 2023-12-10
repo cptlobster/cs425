@@ -5,3 +5,4 @@ FROM httpd
 
 # copy files in src to the Apache server's document folder
 COPY ./src/ /usr/local/apache2/htdocs/
+COPY ./conf/ /usr/local/apache2/conf
