@@ -20,11 +20,9 @@ function getTableAsJson(endpoint) {
 }
 
 function search(endpoint) {
-  const QUERY_STRING = window.location.search;
-  const URL_PARAMS = new URLSearchParams(QUERY_STRING);
-  const TARGET_ID = URL_PARAMS.get('id');
+  id = document.getElementById("search_id").value;
 
-  window.location.href = `./${endpoint}.html?id=${TARGET_ID}`;
+  window.location.href = `./${endpoint}.html?id=${id}`;
 }
 
 /** UI Functions **/
@@ -76,8 +74,14 @@ function setup_packages() {
   const URL_PARAMS = new URLSearchParams(QUERY_STRING);
   const TARGET_ID = URL_PARAMS.get('id');
   const HAS_ID = URL_PARAMS.has('id');
+  const TARGET_DEPOT = URL_PARAMS.get('depot');
+  const HAS_DEPOT = URL_PARAMS.has('depot');
+  const TARGET_VEHICLE = URL_PARAMS.get('fleet');
+  const HAS_VEHICLE = URL_PARAMS.has('fleet');
 
   if (HAS_ID) { var results = getTableAsJson(`/packages/${TARGET_ID}`); }
+  else if (HAS_DEPOT) { var results = getTableAsJson(`/depots/${TARGET_DEPOT}/packages`); }
+  else if (HAS_VEHICLE) { var results = getTableAsJson(`/depots/${TARGET_VEHICLE}/packages`); }
   else { var results = getTableAsJson("/packages"); }
 
   var target = document.getElementById("packages_target");
@@ -156,8 +160,11 @@ function setup_fleet() {
   const URL_PARAMS = new URLSearchParams(QUERY_STRING);
   const TARGET_ID = URL_PARAMS.get('id');
   const HAS_ID = URL_PARAMS.has('id');
+  const TARGET_DEPOT = URL_PARAMS.get('depot');
+  const HAS_DEPOT = URL_PARAMS.has('depot');
 
   if (HAS_ID) { var results = getTableAsJson(`/fleet/${TARGET_ID}`); }
+  else if (HAS_DEPOT) { var results = getTableAsJson(`/depot/${TARGET_DEPOT}/fleet`); }
   else { var results = getTableAsJson("/fleet"); }
 
   var target = document.getElementById("fleet_target");

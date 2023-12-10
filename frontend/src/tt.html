@@ -24,8 +24,8 @@
   <main>
     <!-- Fleet section -->
     <h2>Timetable</h2>
-    <form id="search" method="GET" action="javascript:search('tt')">
-      <input type="text" name="id" /><button type="submit" >Search</button></form>
+    <form id="search" method="GET" action="javascript:;" onsubmit="search('tt')">
+      <input id="search_id" type="text" name="id" /><button type="submit" >Search</button></form>
     </form>
     <div id="tt_target"></div>
     <button onclick="popup()">New Timecard</button>
@@ -34,33 +34,26 @@
   <!-- Popup with form -->
   <div class="over" id="over"></div>
   <div class="popup new_popup" id="new_popup">
-    <h2>New Package Form</h2>
+    <h2>New Timecard</h2>
     <button class="popup_close" onclick="close_popups()">X</button>
-    <form id="newPackForm">
-      <label for="address">Address:</label>
-      <input type="text" id="address" name="address" required><br>
-      
-      <label for="city">City:</label>
-      <input type="text" id="city" name="city" required><br>
-      
-      <label for="state">State:</label>
-      <input type="text" id="state" name="state" required><br>
-      
-      <label for="zip">Zip:</label>
-      <input type="text" id="zip" name="zip" ><br>
-      
-      <label for="sourceDepot">Source Depot:</label>
-      <select id ="sourceDepot" class="depots_dropdown" name="sourceDepot" required>
+    <form id="new_form">
+      <label for="source">Vehicle:</label>
+      <select id ="fleet" class="fleet_dropdown" name="fleet" required>
+      </select><br>
+
+      <label for="source">Source Depot:</label>
+      <select id ="source" class="depots_dropdown" name="source" required>
       </select><br>
       
-      <label for="category">Category:</label>
-      <input type="text" id="category" name="category" required><br>
+      <label for="dest">Destination Depot:</label>
+      <select id ="dest" class="depots_dropdown" name="dest" required>
+      </select><br>
+
+      <label for="departure">Departure:</label>
+      <input type="datetime-local" id="departure" name="departure" required><br />
       
-      <label for="weight">Weight</label>
-      <input type="number" id="weight" name="weight" step="0.1" required><br>
-      
-      <label for="decl">Declared Value ($):</label>
-      <input type="number" id="decl" name="decl" step="0.01" required><br>
+      <label for="departure">Arrival:</label>
+      <input type="datetime-local" id="arrival" name="arrival" required><br />
       
       <button type="button" onclick="submit()">Submit Form</button>
       <button type="button" onclick="clearForm()">Clear Form</button>
@@ -70,7 +63,7 @@
   <div class="popup update_popup" id="update_popup">
     <h2>Update Package</h2>
     <button class="popup_close" onclick="close_popups()">X</button>
-    <form id="updatePackForm">
+    <form id="update_form">
       <label for="id">ID</label>
       <input type="number" id="update_id" name="id" disabled required><br>
       
