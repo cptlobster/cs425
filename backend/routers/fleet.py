@@ -50,3 +50,22 @@ FROM fleet
     WHERE fleet.id = {id}    
 """
     return q.read(query)
+
+
+@router.get("/{id}/packages")
+async def get_packages():
+    query = f"""
+SELECT
+    packages.id,
+    packages.dest, 
+    depots.city,
+    packages.stat,
+    packages.wght,
+    packages.declared_value,
+    packages.vehicle_id,
+    packages.depot_id
+FROM packages
+    JOIN depots ON packages.dest = depots.id
+    WHERE vehicle_id = {id}
+"""
+    return q.read(query)
