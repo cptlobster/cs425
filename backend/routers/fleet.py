@@ -24,6 +24,7 @@ SELECT
 FROM fleet
     JOIN depots ON fleet.destination = depots.id
     LEFT OUTER JOIN weights ON fleet.id = weights.vehicle_id
+ORDER BY fleet.id
 """
     return q.read(query)
 
@@ -47,7 +48,8 @@ SELECT
 FROM fleet
     JOIN depots ON fleet.destination = depots.id
     LEFT OUTER JOIN weights ON fleet.id = weights.vehicle_id
-    WHERE fleet.id = {id}    
+    WHERE fleet.id = {id}   
+ORDER BY fleet.id 
 """
     return q.read(query)
 
@@ -67,5 +69,6 @@ SELECT
 FROM packages
     JOIN depots ON packages.dest = depots.id
     WHERE vehicle_id = {id}
+ORDER BY packages.id
 """
     return q.read(query)

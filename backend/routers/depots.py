@@ -63,6 +63,7 @@ SELECT
 FROM depots
     LEFT OUTER JOIN pkg_wts ON depots.id = pkg_wts.depot_id
     LEFT OUTER JOIN veh_counts ON depots.id = veh_counts.destination
+ORDER BY depots.id
 """
     return q.read(query)
 
@@ -126,12 +127,13 @@ FROM depots
     LEFT OUTER JOIN pkg_wts ON depots.id = pkg_wts.depot_id
     LEFT OUTER JOIN veh_counts ON depots.id = veh_counts.destination
     WHERE depots.id = {id}
+ORDER BY depots.id
 """
     return q.read(query)
 
 
 @router.get("/{id}/packages")
-async def get_packages():
+async def get_packages(id):
     query = f"""
 SELECT
     packages.id,
@@ -145,11 +147,12 @@ SELECT
 FROM packages
     JOIN depots ON packages.dest = depots.id
     WHERE depot_id = {id}
+ORDER BY packages.id
 """
     return q.read(query)
 
 @router.get("/{id}/fleet")
-async def get_fleet():
+async def get_fleet(id):
     query = f"""
 WITH weights AS (
     SELECT vehicle_id, SUM(wght) AS usage FROM packages GROUP BY vehicle_id
@@ -168,6 +171,7 @@ FROM fleet
     JOIN depots ON fleet.destination = depots.id
     LEFT OUTER JOIN weights ON fleet.id = weights.vehicle_id
     WHERE fleet.destination = {id}
+ORDER BY fleet.id
 """
     return q.read(query)
 

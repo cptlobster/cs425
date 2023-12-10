@@ -14,11 +14,13 @@ SELECT
     depots.city,
     packages.stat,
     packages.wght,
+    packages.category,
     packages.declared_value,
     packages.vehicle_id,
     packages.depot_id
 FROM packages
     JOIN depots ON packages.dest = depots.id
+ORDER BY packages.id
 """
     return q.read(query)
 
@@ -32,11 +34,13 @@ SELECT
     depots.city,
     packages.stat,
     packages.wght,
+    packages.category,
     packages.declared_value,
     packages.vehicle_id,
     packages.depot_id
 FROM packages
     JOIN depots ON packages.dest = depots.id
 WHERE packages.id = {id}
+ORDER BY packages.id
 """
     return q.read(query)

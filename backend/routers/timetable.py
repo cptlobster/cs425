@@ -21,6 +21,7 @@ SELECT
 FROM timetable
     JOIN depots AS departs ON departs.id = timetable.source
     JOIN depots AS arrives ON arrives.id = timetable.dest
+ORDER BY timetable.id
 """
     return q.read(query)
 
@@ -41,5 +42,6 @@ FROM timetable
     JOIN depots AS departs ON departs.id = timetable.source
     JOIN depots AS arrives ON arrives.id = timetable.dest
 WHERE timetable.id = {id}
+ORDER BY timetable.id
 """
     return q.read(query)
