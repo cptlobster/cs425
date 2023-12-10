@@ -148,7 +148,7 @@ FROM packages
 """
     return q.read(query)
 
-@router.get("/{id}/vehicles")
+@router.get("/{id}/fleet")
 async def get_fleet():
     query = f"""
 WITH weights AS (

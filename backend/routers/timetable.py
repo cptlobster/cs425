@@ -40,6 +40,6 @@ SELECT
 FROM timetable
     JOIN depots AS departs ON departs.id = timetable.source
     JOIN depots AS arrives ON arrives.id = timetable.dest
-WHERE id = {id}
+WHERE timetable.id = {id}
 """
     return q.read(query)
